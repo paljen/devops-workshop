@@ -6,6 +6,7 @@ pipeline {
       steps {
         sh 'docker build -t devops/aspnetmvc:latest Sample'
       }
+    }
     stage('Stop existing container') {
       agent any
       steps {
@@ -26,7 +27,6 @@ pipeline {
       steps {
         sh 'docker run -d --name=aspnetmvc -p 8100:80 devops/aspnetmvc:latest'
       }
-    }
     }
   }
 }
