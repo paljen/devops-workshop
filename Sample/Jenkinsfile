@@ -21,6 +21,12 @@ pipeline {
         }
       }
     }
+    stage('Docker deploy') {
+      agent any
+      steps {
+        sh 'docker run -d --name=aspnetmvc -p 8100:80 devops/aspnetmvc:latest'
+      }
+    }
     }
   }
 }
