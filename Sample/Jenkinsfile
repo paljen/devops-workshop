@@ -6,6 +6,21 @@ pipeline {
       steps {
         sh 'docker build -t devops/aspnetmvc:latest Sample'
       }
+    stage('Stop existing container') {
+      agent any
+      steps {
+        script {
+          try {
+            sh  '''
+              docker rm -f aspnetmvc
+            '''
+          }
+          catch (exc) {
+              echo 'Container was not running'
+          }
+        }
+      }
+    }
     }
   }
 }
